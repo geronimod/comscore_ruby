@@ -54,6 +54,7 @@ module ComScore
     #     }
     #   end
     def request(service_name, method)
+      raise "Service #{service_name} not found in #{SERVICES.keys}" unless SERVICES[service_name]
       @client.wsdl.document = @client.wsdl.endpoint = SERVICES[service_name][:wsdl]
 
       @client.request(method) do
